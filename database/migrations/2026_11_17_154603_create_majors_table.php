@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('majors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('abbrevation')->unique();
-            $table->boolean('is_active');
+            $table->string('name', 100)->unique();
+            $table->string('abbreviation', 10)->unique();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

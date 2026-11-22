@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('period_slots', function (Blueprint $table) {
             $table->id();
-            $table->integer('slot_number')->unique();
+            $table->unsignedTinyInteger('slot_number')->unique();
             $table->time('start_time');
             $table->time('end_time');
-            $table->boolean('is_break');
-            $table->string('label');
+            $table->boolean('is_break')->default(false);
+            $table->string('label', 30)->nullable();
             $table->timestamps();
         });
     }

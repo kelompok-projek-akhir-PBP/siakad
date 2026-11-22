@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('semesters', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('academic_year_id')->constrained('academic_years')->restrictOnDelete();
             $table->enum('type', ['ganjil', 'genap']);
             $table->date('start_date');
             $table->date('end_date');
             $table->boolean('is_active')->default(false);
             $table->timestamps();
+
+            $table->unique(['academic_year_id', 'type'], 'semesters_year_type_unique');
         });
     }
 

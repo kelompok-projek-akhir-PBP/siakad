@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->integer('kkm');
-            $table->integer('weight_activity')->nullable();
-            $table->integer('weight_lesson')->nullable();
-            $table->integer('weight_exam')->nullable();
-            $table->boolean('is_active');
+            $table->string('name', 100)->unique();
+            $table->unsignedTinyInteger('kkm')->default(70);
+            $table->unsignedTinyInteger('weight_activity')->nullable();
+            $table->unsignedTinyInteger('weight_lesson')->nullable();
+            $table->unsignedTinyInteger('weight_exam')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
