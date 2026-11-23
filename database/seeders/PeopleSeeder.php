@@ -22,7 +22,7 @@ class PeopleSeeder extends DummySeeder
     {
         $now = now();
         $faker = fake('id_ID');
-        $hash = Hash::make('Password@123'); 
+        $hash = Hash::make('Password@123');
         $majors = DB::table('majors')->pluck('id', 'abbreviation')->all();
 
         // GURU
@@ -58,7 +58,7 @@ class PeopleSeeder extends DummySeeder
         }
         DB::table('teachers')->insert($rows);
 
-        // SISWA 
+        // SISWA
         $layoutCount = count(self::CLASS_LAYOUT);
         $userRows = [];
         for ($i = 1; $i <= self::STUDENT_COUNT; $i++) {
