@@ -6,7 +6,7 @@
             <x-ui.input
                 name="email"
                 label="Email"
-                {{-- type="email" --}}
+                type="email"
                 placeholder="example@gmail.com"
                 required
                 value="{{ old('email') }}"
@@ -17,12 +17,19 @@
             <x-ui.input
                 name="password"
                 label="Password"
-                {{-- type="password" --}}
+                type="password"
                 placeholder="********"
                 min=3
                 required
             />
         </div>
+
+        <div class="flex gap-3">
+            <input type="checkbox" name="remember" id="remember">
+            <label for="remember">Ingat saya</label>
+        </div>
+
+        <a href="{{ route('password.request') }}">Lupa Password</a>
 
         <x-ui.button variant="primary" type="submit">Login</x-ui.button>
     </form>

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\layout;
+namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class auth extends Component
+class footer extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class auth extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.layout.auth');
+        return view('components.footer');
     }
 }
