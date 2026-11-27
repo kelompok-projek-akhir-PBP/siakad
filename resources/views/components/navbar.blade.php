@@ -1,30 +1,21 @@
 @php
-    // Breadcrumbs otomatis 100% diambil dari segmen URL aktif
     $segments = request()->segments();
     $dashboardUrl = Route::has('dashboard.index') ? route('dashboard.index') : url('/dashboard');
 
     $breadcrumbs = [];
 
-    // Jika sedang di halaman dashboard / root
     if (empty($segments) || (count($segments) === 1 && $segments[0] === 'dashboard')) {
         $breadcrumbs[] = [
             'label' => 'Dashboard',
             'url' => null,
         ];
     } else {
-        // Selalu sertakan Dashboard sebagai root breadcrumb
         $breadcrumbs[] = [
             'label' => 'Dashboard',
             'url' => $dashboardUrl,
         ];
 
-        // Kamus label khusus singkatan/istilah umum di SIAKAD
         $customLabels = [
-            'krs' => 'KRS',
-            'khs' => 'KHS',
-            'ukt' => 'UKT',
-            'ui' => 'UI',
-            'ui-showcase' => 'UI Showcase',
             'create' => 'Tambah Data',
             'edit' => 'Edit Data',
             'show' => 'Detail',
@@ -39,9 +30,8 @@
             $accumulated .= '/' . $segment;
             $isLast = ($index === array_key_last($segments));
 
-            // Cek jika segmen berupa ID numerik (misal /mahasiswa/15)
             if (is_numeric($segment)) {
-                $label = '#' . $segment;
+                $label = 'id#' . $segment;
             } else {
                 $key = strtolower($segment);
                 $label = $customLabels[$key] ?? ucwords(str_replace(['-', '_'], ' ', $segment));
@@ -54,7 +44,6 @@
         }
     }
 
-    // Dummy preview data notifikasi akademik
     $notifications = [
         [
             'id' => 1,
@@ -89,9 +78,7 @@
 @endphp
 
 <header {{ $attributes->merge(['class' => 'h-16 bg-white dark:bg-gray-900 border-b border-gray-200/80 dark:border-gray-800 px-4 sm:px-6 flex items-center justify-between shrink-0 select-none transition-colors duration-200 z-30 sticky top-0']) }}>
-    <!-- Bagian Kiri: Sidebar Toggle & Breadcrumb Path -->
     <div class="flex items-center gap-2 sm:gap-3 min-w-0">
-        <!-- Tombol Toggle Collapse / Expand Sidebar -->
         <button type="button"
                 id="navbar-sidebar-toggle"
                 onclick="window.toggleSidebar()"
@@ -113,11 +100,11 @@
                         @endif
 
                         @if ($isLast || empty($crumb['url']))
-                            <span class="font-semibold text-gray-800 dark:text-gray-100 truncate max-w-[160px] sm:max-w-xs" aria-current="page">
+                            <span class="font-semibold text-gray-800 dark:text-gray-100 truncate max-w-40 sm:max-w-xs" aria-current="page">
                                 {{ $crumb['label'] }}
                             </span>
                         @else
-                            <a href="{{ $crumb['url'] }}" class="inline-flex items-center gap-1.5 text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors font-medium truncate max-w-[120px] sm:max-w-none">
+                            <a href="{{ $crumb['url'] }}" class="inline-flex items-center gap-1.5 text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors font-medium truncate max-w-30 sm:max-w-none">
                                 <span class="truncate">{{ $crumb['label'] }}</span>
                             </a>
                         @endif
@@ -127,9 +114,7 @@
         </nav>
     </div>
 
-    <!-- Bagian Kanan: Notifikasi & Dark Mode Toggle -->
     <div class="flex items-center gap-1.5 sm:gap-2.5">
-        <!-- 1. Dropdown Notifikasi -->
         <div class="relative" id="notification-wrapper">
             <button type="button"
                     id="notification-button"
@@ -139,7 +124,6 @@
                     class="relative p-2 rounded-xl text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors cursor-pointer focus:outline-none">
                 <x-lucide-bell class="w-5 h-5" />
 
-                <!-- Badge Indikator Unread -->
                 @if ($unreadCount > 0)
                     <span id="notification-dot" class="absolute top-1.5 right-1.5 flex h-2 w-2">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -148,10 +132,8 @@
                 @endif
             </button>
 
-            <!-- Dropdown Menu Box -->
             <div id="notification-menu"
                  class="hidden fixed inset-x-3 top-16 mt-2 sm:inset-auto sm:absolute sm:right-0 sm:top-full max-w-sm sm:max-w-none mx-auto sm:mx-0 w-auto sm:w-96 bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-200/90 dark:border-gray-800 overflow-hidden z-50 transition-all duration-200">
-                <!-- Dropdown Header -->
                 <div class="px-4 py-3.5 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between bg-slate-50/60 dark:bg-gray-800/40">
                     <div class="flex items-center gap-2">
                         <h3 class="text-sm font-bold text-gray-900 dark:text-white">Notifikasi</h3>
@@ -166,17 +148,14 @@
                     </button>
                 </div>
 
-                <!-- Dropdown List Items -->
                 <div class="max-h-80 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scrollbar-thin">
                     @forelse ($notifications as $notif)
-                        <div class="notification-item p-3.5 hover:bg-slate-50 dark:hover:bg-gray-800/60 transition-colors flex gap-3 cursor-pointer group {{ $notif['unread'] ? 'bg-primary/[0.02] dark:bg-primary/[0.03]' : '' }}"
-                             data-id="{{ $notif['id'] }}">
-                            <!-- Icon Box -->
+                        <div class="notification-item p-3.5 hover:bg-slate-50 dark:hover:bg-gray-800/60 transition-colors flex gap-3 cursor-pointer group {{ $notif['unread'] ? 'bg-primary/2 dark:bg-primary/3' : '' }}"
+                            data-id="{{ $notif['id'] }}">
                             <div class="w-9 h-9 rounded-xl {{ $notif['icon_bg'] }} shrink-0 flex items-center justify-center">
                                 <x-dynamic-component :component="'lucide-' . $notif['icon']" class="w-4 h-4" />
                             </div>
 
-                            <!-- Content -->
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-start justify-between gap-1">
                                     <p class="text-xs font-semibold text-gray-800 dark:text-gray-200 group-hover:text-primary transition-colors leading-snug">
@@ -201,7 +180,6 @@
                     @endforelse
                 </div>
 
-                <!-- Dropdown Footer -->
                 <div class="px-4 py-2.5 border-t border-gray-100 dark:border-gray-800 text-center bg-slate-50/40 dark:bg-gray-800/20">
                     <a href="{{ url('/notifikasi') }}" class="text-xs font-semibold text-primary hover:underline">
                         Lihat Semua Notifikasi
@@ -210,25 +188,20 @@
             </div>
         </div>
 
-        <!-- 2. Dark Mode Toggle Switch -->
         <button type="button"
                 id="theme-toggle"
                 aria-label="Toggle Light and Dark Mode"
                 title="Ganti Tema (Light/Dark)"
                 class="p-2 rounded-xl text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors cursor-pointer focus:outline-none">
-            <!-- Icon Matahari (Tampil saat Dark Mode) -->
             <x-lucide-sun class="w-5 h-5 hidden dark:block text-gray-400 hover:text-primary transition-transform duration-200 hover:rotate-45" />
 
-            <!-- Icon Bulan (Tampil saat Light Mode) -->
             <x-lucide-moon class="w-5 h-5 block dark:hidden text-gray-600 hover:text-primary transition-transform duration-200 hover:-rotate-12" />
         </button>
     </div>
 </header>
 
-<!-- Script Interaktif Navbar: Toggle Notifikasi & Dark Mode -->
 <script>
     (function () {
-        // --- 1. Logika Toggle Notifikasi ---
         const notifWrapper = document.getElementById('notification-wrapper');
         const notifButton = document.getElementById('notification-button');
         const notifMenu = document.getElementById('notification-menu');
@@ -249,7 +222,6 @@
                 }
             });
 
-            // Tutup dropdown saat klik di luar
             document.addEventListener('click', function (e) {
                 if (notifWrapper && !notifWrapper.contains(e.target)) {
                     notifMenu.classList.add('hidden');
@@ -257,7 +229,6 @@
                 }
             });
 
-            // Tutup dengan tombol Escape
             document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape' && !notifMenu.classList.contains('hidden')) {
                     notifMenu.classList.add('hidden');
@@ -265,7 +236,6 @@
                 }
             });
 
-            // Tandai semua dibaca
             if (markAllReadBtn) {
                 markAllReadBtn.addEventListener('click', function (e) {
                     e.stopPropagation();
@@ -280,7 +250,6 @@
             }
         }
 
-        // --- 2. Logika Toggle Light / Dark Mode ---
         const themeToggle = document.getElementById('theme-toggle');
 
         function updateTheme(isDark) {

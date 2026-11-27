@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('semesters', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('academic_year_id')->constrained()->onDelete('cascade');
             $table->enum('type', ['ganjil', 'genap']);
             $table->date('start_date');
             $table->date('end_date');

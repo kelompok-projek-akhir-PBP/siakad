@@ -48,8 +48,7 @@ class AcademicYearController extends Controller
             $requestData['is_active'] = true;
         }
         AcademicYear::create($requestData);
-        toastr()->success('Berhasil menambahan tahun ajaran baru');
-
+        toastr()->success('Berhasil membuat tahun ajaran baru');
         return back();
     }
 
@@ -97,7 +96,6 @@ class AcademicYearController extends Controller
         $academicYear = AcademicYear::findOrFail($id);
         $academicYear->delete();
         toastr()->success('Berhasil menghapus data tahun ajaran');
-
         return back();
     }
 }
