@@ -1,4 +1,4 @@
-<x-layout.master>
+<x-layout.app title="UI Design System Showcase">
     <div class="min-h-screen bg-slate-50 py-10 px-4 sm:px-6 lg:px-8 font-sans">
         <div class="max-w-6xl mx-auto space-y-10">
 
@@ -195,42 +195,71 @@
             </x-ui.card>
 
             <!-- 5. Table Section -->
-            <x-ui.card title="5. Data Table (`<x-ui.table>`)" subtitle="Tabel responsif dengan styling bersih">
-                <x-ui.table :headers="['NIM', 'Nama Mahasiswa', 'Program Studi', 'Status', 'Aksi']" striped>
-                    <tr class="hover:bg-primary-subtle/20 transition-colors">
-                        <td class="px-5 py-3.5 font-mono text-xs font-semibold text-gray-700">220101001</td>
-                        <td class="px-5 py-3.5 font-medium text-gray-900">Ahmad Fauzi</td>
-                        <td class="px-5 py-3.5 text-gray-600">Teknik Informatika</td>
-                        <td class="px-5 py-3.5">
-                            <x-ui.badge variant="success" dot size="sm">Aktif</x-ui.badge>
-                        </td>
-                        <td class="px-5 py-3.5">
-                            <x-ui.button variant="outline" size="sm">Detail</x-ui.button>
-                        </td>
-                    </tr>
-                    <tr class="hover:bg-primary-subtle/20 transition-colors">
-                        <td class="px-5 py-3.5 font-mono text-xs font-semibold text-gray-700">220101002</td>
-                        <td class="px-5 py-3.5 font-medium text-gray-900">Siti Nurhaliza</td>
-                        <td class="px-5 py-3.5 text-gray-600">Sistem Informasi</td>
-                        <td class="px-5 py-3.5">
-                            <x-ui.badge variant="warning" dot size="sm">Cuti</x-ui.badge>
-                        </td>
-                        <td class="px-5 py-3.5">
-                            <x-ui.button variant="outline" size="sm">Detail</x-ui.button>
-                        </td>
-                    </tr>
-                    <tr class="hover:bg-primary-subtle/20 transition-colors">
-                        <td class="px-5 py-3.5 font-mono text-xs font-semibold text-gray-700">220101003</td>
-                        <td class="px-5 py-3.5 font-medium text-gray-900">Budi Setiawan</td>
-                        <td class="px-5 py-3.5 text-gray-600">Teknik Elektro</td>
-                        <td class="px-5 py-3.5">
-                            <x-ui.badge variant="primary" dot size="sm">Reguler</x-ui.badge>
-                        </td>
-                        <td class="px-5 py-3.5">
-                            <x-ui.button variant="outline" size="sm">Detail</x-ui.button>
-                        </td>
-                    </tr>
-                </x-ui.table>
+            <x-ui.card title="5. Data Table (`<x-ui.table>`)" subtitle="Tabel responsif dengan hover otomatis, striping, header alignment, empty state, dan slot pagination">
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="text-sm font-semibold text-gray-700 mb-2">Contoh 1: Tabel Data dengan Striped & Hover Otomatis</h4>
+                        <x-ui.table
+                            :headers="[
+                                ['label' => 'NIM', 'width' => '130px'],
+                                ['label' => 'Nama Mahasiswa'],
+                                ['label' => 'Program Studi'],
+                                ['label' => 'Status', 'align' => 'center'],
+                                ['label' => 'Aksi', 'align' => 'right'],
+                            ]"
+                            striped
+                        >
+                            <tr>
+                                <td class="font-mono text-xs font-semibold text-gray-700">220101001</td>
+                                <td class="font-medium text-gray-900">Ahmad Fauzi</td>
+                                <td class="text-gray-600">Teknik Informatika</td>
+                                <td class="text-center">
+                                    <x-ui.badge variant="success" dot size="sm">Aktif</x-ui.badge>
+                                </td>
+                                <td class="text-right">
+                                    <x-ui.button variant="outline" size="sm">Detail</x-ui.button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-mono text-xs font-semibold text-gray-700">220101002</td>
+                                <td class="font-medium text-gray-900">Siti Nurhaliza</td>
+                                <td class="text-gray-600">Sistem Informasi</td>
+                                <td class="text-center">
+                                    <x-ui.badge variant="warning" dot size="sm">Cuti</x-ui.badge>
+                                </td>
+                                <td class="text-right">
+                                    <x-ui.button variant="outline" size="sm">Detail</x-ui.button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-mono text-xs font-semibold text-gray-700">220101003</td>
+                                <td class="font-medium text-gray-900">Budi Setiawan</td>
+                                <td class="text-gray-600">Teknik Elektro</td>
+                                <td class="text-center">
+                                    <x-ui.badge variant="primary" dot size="sm">Reguler</x-ui.badge>
+                                </td>
+                                <td class="text-right">
+                                    <x-ui.button variant="outline" size="sm">Detail</x-ui.button>
+                                </td>
+                            </tr>
+                            <x-slot:footer>
+                                <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <span>Menampilkan 3 dari 3 data mahasiswa</span>
+                                    <span>Halaman 1 dari 1</span>
+                                </div>
+                            </x-slot:footer>
+                        </x-ui.table>
+                    </div>
+
+                    <div>
+                        <h4 class="text-sm font-semibold text-gray-700 mb-2">Contoh 2: Tampilan Empty State Otomatis</h4>
+                        <x-ui.table
+                            :headers="['Kode MK', 'Nama Mata Kuliah', 'SKS', 'Dosen Pengampu', 'Aksi']"
+                            emptyTitle="Tidak Ada Jadwal Kuliah Ditemukan"
+                            emptyDescription="Belum ada mata kuliah yang terjadwal untuk semester ini."
+                        />
+                    </div>
+                </div>
             </x-ui.card>
 
             <!-- 6. Modal Dialog Section -->
@@ -257,4 +286,4 @@
 
         </div>
     </div>
-</x-layout.master>
+</x-layout.app>

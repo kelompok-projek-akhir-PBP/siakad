@@ -13,13 +13,13 @@
             ],
         ],
         [
-            'group' => 'Akademik',
+            'group' => 'Master Data',
             'items' => [
                 [
-                    'label' => 'Siswa',
-                    'icon' => 'users',
-                    'url' => url('/siswa'),
-                    'active' => request()->is('siswa*'),
+                    'label' => 'Tahun Ajaran',
+                    'icon' => 'calendar',
+                    'url' => route('academic-years.index'),
+                    'active' => request()->routeIs('academic-years.*'),
                     'badge' => null,
                 ]
             ],
@@ -62,7 +62,7 @@
 
 <!-- Sidebar Container -->
 <aside id="main-sidebar"
-       {{ $attributes->merge(['class' => 'w-64 bg-white dark:bg-gray-900 border-r border-gray-200/80 dark:border-gray-800 flex flex-col h-screen shrink-0 font-sans select-none shadow-xs transition-all duration-300 ease-in-out fixed md:static inset-y-0 left-0 z-50 -translate-x-full md:translate-x-0']) }}>
+       {{ $attributes->merge(['class' => 'w-64 bg-white dark:bg-gray-900 border-r border-gray-200/80 dark:border-gray-800 flex flex-col h-screen shrink-0 font-sans select-none shadow-xs transition-all duration-300 ease-in-out fixed md:sticky md:top-0 inset-y-0 left-0 z-50 -translate-x-full md:translate-x-0']) }}>
 
     <!-- Header / Brand Logo -->
     <div id="sidebar-header" class="h-16 flex items-center justify-between px-4 border-b border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 transition-colors">

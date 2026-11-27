@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MasterData\AcademicYearController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -30,4 +31,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LogoutController::class, 'post'])->name('logout.post');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::resource('/roles', RoleController::class);
+    Route::resource('/academic-years', AcademicYearController::class);
 });

@@ -2,7 +2,7 @@
     'title' => '',
 ])
 
-<x-layout.master :title="$title">
+<x-layout.app :title="$title">
     <div class="flex min-h-screen bg-slate-50 dark:bg-gray-950 font-sans transition-colors duration-200">
         <x-sidebar />
         <div class="flex-1 flex flex-col min-w-0">
@@ -13,4 +13,4 @@
             <x-footer />
         </div>
     </div>
-</x-layout.master>
+</x-layout.app>

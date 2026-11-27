@@ -10,7 +10,7 @@
                 <thead class="bg-gray-50/80 border-b border-gray-200 text-xs font-semibold uppercase tracking-wider text-secondary">
                     <tr>
                         @foreach ($headers as $header)
-                            <th scope="col" class="px-5 py-3.5">{{ $header }}</th>
+                            <th scope="col" class="px-5 py-3.5 text-center">{{ $header }}</th>
                         @endforeach
                     </tr>
                 </thead>

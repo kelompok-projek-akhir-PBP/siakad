@@ -118,9 +118,6 @@
                             </span>
                         @else
                             <a href="{{ $crumb['url'] }}" class="inline-flex items-center gap-1.5 text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors font-medium truncate max-w-[120px] sm:max-w-none">
-                                @if ($loop->first)
-                                    <x-lucide-home class="w-4 h-4 shrink-0 text-gray-400 dark:text-gray-500" />
-                                @endif
                                 <span class="truncate">{{ $crumb['label'] }}</span>
                             </a>
                         @endif

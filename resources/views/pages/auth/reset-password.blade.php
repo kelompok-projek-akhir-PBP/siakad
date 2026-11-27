@@ -1,4 +1,4 @@
-<x-layout.master title="Reset Password">
+<x-layout.app title="Reset Password">
     <form action="{{ route('password.update') }}" method="POST" class="max-w-125 m-5">
         @csrf
 
@@ -39,4 +39,4 @@
 
         <x-ui.button variant="primary" type="submit">Reset Password</x-ui.button>
     </form>
-</x-layout.master>
+</x-layout.app>

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class workspace extends Component
+class app extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class workspace extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.layout.workspace');
+        return view('components.layout.app');
     }
 }

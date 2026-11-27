@@ -1,4 +1,4 @@
-<x-layout.master title="Login">
+<x-layout.app title="Login">
     <form action="{{ route('login.post') }}" method="POST" class="max-w-125 m-5">
         @csrf
 
@@ -33,4 +33,4 @@
 
         <x-ui.button variant="primary" type="submit">Login</x-ui.button>
     </form>
-</x-layout.master>
+</x-layout.app>

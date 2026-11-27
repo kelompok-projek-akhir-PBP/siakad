@@ -1,4 +1,4 @@
-<x-layout.master title="Lupa Password">
+<x-layout.app title="Lupa Password">
     <form action="{{ route('password.email') }}" method="POST" class="max-w-125 m-5">
         @csrf
 
@@ -15,4 +15,4 @@
 
         <x-ui.button variant="primary" type="submit">Send Password Reset Token</x-ui.button>
     </form>
-</x-layout.master>
+</x-layout.app>
