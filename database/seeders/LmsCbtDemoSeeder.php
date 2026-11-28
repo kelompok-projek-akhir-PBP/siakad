@@ -57,7 +57,7 @@ class LmsCbtDemoSeeder extends Seeder
             ]);
 
             $admin = User::firstOrCreate(
-                ['email' => 'admin@siakad.test'],
+                ['email' => 'admin@gmail.com'],
                 ['name' => 'Admin Demo', 'password' => 'password']
             );
             if (! $admin->hasRole('admin')) {
@@ -66,7 +66,7 @@ class LmsCbtDemoSeeder extends Seeder
 
             $teachers = collect(range(1, 3))->map(function ($n) {
                 $user = User::firstOrCreate(
-                    ['email' => "guru{$n}@siakad.test"],
+                    ['email' => "guru{$n}@gmail.com"],
                     ['name' => "Guru Demo {$n}", 'password' => 'password']
                 );
                 if (! $user->hasRole('teacher')) {
@@ -89,7 +89,7 @@ class LmsCbtDemoSeeder extends Seeder
 
             foreach (range(1, 10) as $n) {
                 $user = User::firstOrCreate(
-                    ['email' => "siswa{$n}@siakad.test"],
+                    ['email' => "siswa{$n}@gmail.com"],
                     ['name' => "Siswa Demo {$n}", 'password' => 'password']
                 );
                 if (! $user->hasRole('student')) {
