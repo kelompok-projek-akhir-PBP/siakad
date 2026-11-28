@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('lms_task_options', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('lms_task_question_id')->constrained('lms_task_questions')->cascadeOnDelete();
+            $table->text('option_text');
+            $table->boolean('is_correct')->default(false);
+            $table->unsignedSmallInteger('sort_order');
             $table->timestamps();
         });
     }

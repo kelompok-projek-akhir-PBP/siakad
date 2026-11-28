@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('material_attachments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('learning_material_id')->constrained('learning_materials')->cascadeOnDelete();
+            $table->enum('type', ['file', 'link']);
+            $table->string('title', 150)->nullable();
+            $table->string('file_path')->nullable();
+            $table->string('original_name', 150)->nullable();
+            $table->unsignedInteger('file_size')->nullable();
+            $table->string('url', 500)->nullable();
             $table->timestamps();
         });
     }

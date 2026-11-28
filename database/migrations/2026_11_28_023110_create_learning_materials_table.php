@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('learning_materials', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('teaching_assignment_id')->constrained('teaching_assignments')->restrictOnDelete();
+            $table->string('title', 150);
+            $table->longText('body')->nullable();
+            $table->foreignId('created_by_teacher_id')->constrained('teachers')->restrictOnDelete();
+            $table->dateTime('published_at')->nullable();
             $table->timestamps();
         });
     }

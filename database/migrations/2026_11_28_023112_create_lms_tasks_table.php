@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('lms_tasks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('teaching_assignment_id')->constrained('teaching_assignments')->restrictOnDelete();
+            $table->string('title', 150);
+            $table->text('description')->nullable();
+            $table->dateTime('due_at');
+            $table->foreignId('created_by_teacher_id')->constrained('teachers')->restrictOnDelete();
+            $table->dateTime('published_at')->nullable();
             $table->timestamps();
         });
     }

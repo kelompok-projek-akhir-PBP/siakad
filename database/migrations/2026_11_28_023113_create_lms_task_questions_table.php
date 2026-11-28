@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('lms_task_questions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('lms_task_id')->constrained('lms_tasks')->cascadeOnDelete();
+            $table->text('question_text');
+            $table->unsignedSmallInteger('sort_order');
             $table->timestamps();
         });
     }
