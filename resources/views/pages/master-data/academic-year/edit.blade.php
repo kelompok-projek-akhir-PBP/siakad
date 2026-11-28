@@ -5,8 +5,9 @@
     </header>
     <div>
         <x-ui.card title="Buat Tahun Ajaran Baru">
-            <form action="{{ route('academic-years.store') }}" method="POST">
+            <form action="{{ route('academic-years.update', $academicYear->id) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="mb-3">
                     <x-ui.input
                         name="name"
@@ -14,7 +15,7 @@
                         type="text"
                         label="Nama Tahun Ajaran"
                         placeholder="contoh:2026/2027"
-                        value="{{ $accademicYear->name }}"
+                        value="{{ $academicYear->name }}"
                         required
                     />
                 </div>
@@ -25,7 +26,7 @@
                             id="start_ddate"
                             type="date"
                             label="Tanggal Mulai"
-                            value="{{ $accademicYear->start_date }}"
+                            value="{{ $academicYear->start_date }}"
                             required
                         />
                     </div>
@@ -35,13 +36,13 @@
                             id="end_date"
                             type="date"
                             label="Tanggal Selesai"
-                            value="{{ $accademicYear->end_date }}"
+                            value="{{ $academicYear->end_date }}"
                             required
                         />
                     </div>
                 </div>
                 <div class="mb-3 text-end">
-                    @if ($accademicYear->is_active)
+                    @if ($academicYear->is_active)
                         <input id="is_active" name="is_active_checkbox" type="checkbox" checked>
                     @else
                         <input id="is_active" name="is_active_checkbox" type="checkbox">
@@ -49,11 +50,12 @@
                     <label for="is_active" class="select-none cursor-pointer">Tahun Ajaran Aktif</label>
                 </div>
                 <div class="my-5 grid grid-cols-12 gap-2">
-                    <div class="col-span-12">
-                        <x-ui.button type="submit" variant="primary" class="w-full">Kirim</x-ui.button>
-                    </div>
-                    <div class="col-span-12">
+                    <div class="col-span-6"></div>
+                    <div class="col-span-3">
                         <x-ui.button type="reset" variant="outline" class="w-full">Reset</x-ui.button>
+                    </div>
+                    <div class="col-span-3">
+                        <x-ui.button type="submit" variant="primary" class="w-full">Simpan Perubahan</x-ui.button>
                     </div>
                 </div>
             </form>

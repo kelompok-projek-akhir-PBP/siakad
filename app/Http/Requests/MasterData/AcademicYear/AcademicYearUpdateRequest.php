@@ -25,7 +25,7 @@ class AcademicYearUpdateRequest extends FormRequest
     {
         $academicYearId = $this->route('academic_year');
         return [
-            'name' => ['required', 'string', 'max:255', Rule::unique('academic_year', 'name')->ignore($academicYearId)],
+            'name' => ['required', 'string', 'max:255', Rule::unique('academic_years', 'name')->ignore($academicYearId)],
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'is_active_checkbox' => 'nullable',

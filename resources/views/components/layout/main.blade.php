@@ -13,4 +13,29 @@
             <x-footer />
         </div>
     </div>
+
+    <script>
+            document.addEventListener('submit', function (e) {
+            const form = e.target.closest('.delete-form');
+                if (!form) return;
+
+                e.preventDefault();
+
+                Swal.fire({
+                    title: form.dataset.title || 'Apakah Anda yakin?',
+                    text: form.dataset.text || 'Data yang dihapus tidak dapat dikembalikan.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#dc2626',
+                    cancelButtonColor: '#6b7280',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        </script>
 </x-layout.app>

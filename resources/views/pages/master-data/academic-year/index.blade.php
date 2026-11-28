@@ -82,7 +82,7 @@
                                             <x-lucide-pencil class="w-4 h-4" />
                                         </x-ui.button>
                                     </div>
-                                    <form action="{{ route('academic-years.destroy', $item->id) }}" method="POST">
+                                    <form action="{{ route('academic-years.destroy', $item->id) }}" method="POST" class="delete-form">
                                         @csrf
                                         @method('DELETE')
                                         <x-ui.button type="submit" variant="danger">

@@ -65,8 +65,8 @@ class AcademicYearController extends Controller
      */
     public function edit(string $id)
     {
-        $accademicYear = AcademicYear::findOrFail($id);
-        return view('pages.master-data.academic-year.edit', compact('accademicYear'));
+        $academicYear = AcademicYear::findOrFail($id);
+        return view('pages.master-data.academic-year.edit', compact('academicYear'));
     }
 
     /**
